@@ -185,6 +185,7 @@ class ActivitiesBiosphereTable(ABFilterableDataFrameView):
         submenu_copy.setTitle("Copy to clipboard")
         submenu_copy.setIcon(qicons.copy_to_clipboard)
         submenu_copy.addAction(self.copy_exchanges_for_SDF_action)
+        submenu_copy.addAction(self.copy_exchanges_in_BD_action)
 
         menu.addAction(self.open_activity_action)
         menu.addAction(self.open_activity_graph_action)
@@ -201,6 +202,9 @@ class ActivitiesBiosphereTable(ABFilterableDataFrameView):
 
         self.copy_exchanges_for_SDF_action.triggered.connect(
             self.copy_exchanges_for_SDF
+        )
+        self.copy_exchanges_in_BD_action.triggered.connect(
+            self.copy_exchanges_in_BD_format
         )
 
         self.doubleClicked.connect(self.open_activity_action.trigger)
@@ -226,6 +230,12 @@ class ActivitiesBiosphereTable(ABFilterableDataFrameView):
     def copy_exchanges_for_SDF(self) -> None:
         """Copy these exchanges for SDF format"""
         self.model.copy_exchanges_for_SDF(self.selectedIndexes())
+    
+    @Slot(name="copyFlowInformation")
+    def copy_exchanges_in_BD_format(self) -> None:
+        pass
+    #     """Copy these exchanges in BD format"""
+    #     self.model.copy_exchanges_in_BD_format(self.selectedIndexes())
 
     def sync(self, db_name: str) -> None:
         self.model.sync(db_name)

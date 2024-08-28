@@ -43,6 +43,10 @@ class BaseExchangeTable(ABDataFrameView):
             self.selected_exchanges
         )
 
+        self.copy_exchanges_for_SDF_action = actions.ExchangeCopySDF.get_QAction(
+            self.selected_exchanges
+        )
+
         self.key = getattr(parent, "key", None)
         self.model = self.MODEL(self.key, self)
 
